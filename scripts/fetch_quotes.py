@@ -95,6 +95,27 @@ def main():
         print("holdings: skipped (no passphrase secret yet)")
         return
 
+    funds = {}
+    rms = call("/rest/secure/angelbroking/user/v1/getRMS", headers=hq)
+    if rms.get("status") and rms.get("data"):
+        d = rms["data"]
+        def num(x):
+            try: return round(float(x), 2)
+            except (TypeError, ValueError): return None
+        used_parts = ["utiliseddebits", "utilisedspan", "utilisedexposure",
+                      "utilisedoptionpremium", "utilisedholdingsales",
+                      "utilisedturnover", "utilisedpayout"]
+        used = sum(num(d.get(k)) or 0 for k in used_parts)
+        funds = {"available_cash": num(d.get("availablecash")),
+                 "net": num(d.get("net")),
+                 "collateral": num(d.get("collateral")),
+                 "used_margin": round(used, 2),
+                 "m2m_unrealized": num(d.get("m2munrealized")),
+                 "m2m_realized": num(d.get("m2mrealized"))}
+        print("OK funds - available_cash present:", funds["available_cash"] is not None)
+    else:
+        print("FUNDS FAILED (continuing):", rms.get("errorcode"), rms.get("message"))
+
     hold = call("/rest/secure/angelbroking/portfolio/v1/getAllHolding", headers=hq)
     if not hold.get("status"):
         print("HOLDINGS FAILED (quotes still saved):", hold.get("errorcode"), hold.get("message"))
@@ -113,7 +134,7 @@ def main():
     t = data.get("totalholding") or {}
     totals = {"invested": t.get("totalinvvalue"), "current": t.get("totalholdingvalue"),
               "pnl": t.get("totalprofitandloss"), "pnl_pct": t.get("totalpnlpercentage")}
-    payload = {"holdings": items, "totals": totals}
+    payload = {"holdings": items, "totals": totals, "funds": funds}
     enc = encrypt_holdings(payload, passphrase)
     enc["updated_at_ist"] = now.strftime("%Y-%m-%d %H:%M:%S IST")
     enc["count"] = len(items)

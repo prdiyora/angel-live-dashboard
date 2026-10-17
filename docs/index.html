@@ -43,6 +43,11 @@
   .trow td { font-weight:600; }
   .hmeta { font-size:11px; color:var(--mut); margin-top:8px; }
   #herr { color:var(--dn); font-size:12px; margin-top:8px; display:none; }
+
+  .funds { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-top:12px; }
+  .fund { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:10px 12px; }
+  .fund .k { font-size:10px; color:var(--mut); text-transform:uppercase; letter-spacing:.4px; }
+  .fund .v { font-size:17px; font-weight:700; margin-top:3px; }
 </style>
 </head>
 <body>
@@ -64,6 +69,7 @@
   </div>
   <div id="hopen" style="display:none">
     <div style="text-align:right"><button class="ghost" id="hlock">Lock</button></div>
+    <div class="funds" id="funds"></div>
     <div style="overflow-x:auto"><table id="htable"></table></div>
   </div>
 </div>
@@ -152,6 +158,15 @@ function renderHoldings(){
   if (!(hData.holdings||[]).length){
     rows += '<tr><td colspan="8" style="text-align:center;color:var(--mut)">No holdings right now - jyaare shares demat ma aavshe tyare dekhase.</td></tr>';
   }
+  const f = hData.funds||{};
+  const fbox = document.getElementById('funds');
+  if (f.available_cash != null || f.net != null){
+    const cards = [['Available cash', f.available_cash], ['Net balance', f.net],
+                   ['Used margin', f.used_margin], ['Collateral', f.collateral],
+                   ['M2M unrealized', f.m2m_unrealized], ['M2M realized', f.m2m_realized]];
+    fbox.innerHTML = cards.filter(c => c[1] != null).map(c =>
+      '<div class="fund"><div class="k">'+c[0]+'</div><div class="v">&#8377;'+fmt(c[1])+'</div></div>').join('');
+  } else { fbox.innerHTML = ''; }
   const tt = hData.totals||{};
   if (tt.invested!=null){
     const cls = (tt.pnl||0) >= 0 ? 'up' : 'dn';
