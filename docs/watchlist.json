@@ -1,0 +1,12 @@
+[
+  {"name": "Reliance Industries", "symbol": "RELIANCE-EQ", "token": "2885"},
+  {"name": "HDFC Bank", "symbol": "HDFCBANK-EQ", "token": "1333"},
+  {"name": "ICICI Bank", "symbol": "ICICIBANK-EQ", "token": "4963"},
+  {"name": "Infosys", "symbol": "INFY-EQ", "token": "1594"},
+  {"name": "TCS", "symbol": "TCS-EQ", "token": "11536"},
+  {"name": "Bharti Airtel", "symbol": "BHARTIARTL-EQ", "token": "10604"},
+  {"name": "Larsen & Toubro", "symbol": "LT-EQ", "token": "11483"},
+  {"name": "ITC", "symbol": "ITC-EQ", "token": "1660"},
+  {"name": "State Bank of India", "symbol": "SBIN-EQ", "token": "3045"},
+  {"name": "Kotak Mahindra Bank", "symbol": "KOTAKBANK-EQ", "token": "1922"}
+]

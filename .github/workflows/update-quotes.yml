@@ -1,0 +1,33 @@
+name: Update quotes
+on:
+  schedule:
+    # Every 5 min, Mon-Fri, ~08:30-16:25 IST (03:00-10:55 UTC)
+    - cron: "*/5 3-10 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests pyotp
+      - name: Fetch quotes (read-only)
+        env:
+          ANGEL_API_KEY: ${{ secrets.ANGEL_API_KEY }}
+          ANGEL_CLIENT_CODE: ${{ secrets.ANGEL_CLIENT_CODE }}
+          ANGEL_MPIN: ${{ secrets.ANGEL_MPIN }}
+          ANGEL_TOTP_SECRET: ${{ secrets.ANGEL_TOTP_SECRET }}
+        run: python scripts/fetch_quotes.py
+      - name: Commit if changed
+        run: |
+          git config user.name "quotes-bot"
+          git config user.email "quotes-bot@users.noreply.github.com"
+          git add docs/quotes.json
+          git diff --cached --quiet || git commit -m "quotes: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push

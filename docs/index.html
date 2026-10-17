@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live Stocks - Top 10 NSE</title>
+<style>
+  :root { --bg:#0b0e14; --card:#141925; --border:#232b3d; --txt:#e8ecf4; --mut:#8b94a7;
+          --up:#16c784; --dn:#ea3943; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--bg); color:var(--txt); font-family:-apple-system,Segoe UI,Roboto,Inter,sans-serif;
+         padding:20px; max-width:1100px; margin:0 auto; }
+  header { display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin-bottom:18px; }
+  h1 { font-size:20px; font-weight:700; letter-spacing:.3px; }
+  .meta { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .badge { font-size:12px; padding:4px 10px; border-radius:999px; border:1px solid var(--border); color:var(--mut); }
+  .badge.open { color:var(--up); border-color:var(--up); }
+  .badge.closed { color:var(--dn); border-color:var(--dn); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; }
+  .row { display:flex; justify-content:space-between; align-items:baseline; }
+  .name { font-size:14px; font-weight:600; }
+  .sym { font-size:11px; color:var(--mut); }
+  .ltp { font-size:24px; font-weight:700; margin:8px 0 2px; }
+  .chg { font-size:14px; font-weight:600; }
+  .up { color:var(--up); } .dn { color:var(--dn); }
+  .stats { display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin-top:12px; font-size:12px; color:var(--mut); }
+  .stats b { color:var(--txt); font-weight:600; float:right; }
+  .range { margin-top:12px; height:5px; background:var(--border); border-radius:99px; position:relative; }
+  .range .dot { position:absolute; top:-3px; width:11px; height:11px; border-radius:50%; background:var(--txt); transform:translateX(-50%); }
+  .range-lbl { display:flex; justify-content:space-between; font-size:10px; color:var(--mut); margin-top:5px; }
+  .empty { color:var(--mut); font-size:14px; padding:40px; text-align:center; grid-column:1/-1; }
+  footer { margin-top:18px; font-size:11px; color:var(--mut); text-align:center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Top 10 Stocks &middot; Live</h1>
+  <div class="meta">
+    <span class="badge" id="mkt">--</span>
+    <span class="badge" id="upd">--</span>
+  </div>
+</header>
+<div class="grid" id="grid"><div class="empty">Loading...</div></div>
+<footer>Research only &middot; Angel One SmartAPI &middot; refreshes ~every 5 min in market hours &middot; auto-reload 60s</footer>
+<script>
+const fmt = n => n==null ? '--' : Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+const fmtVol = n => n==null ? '--' : Intl.NumberFormat('en-IN', {notation:'compact', maximumFractionDigits:1}).format(n);
+function istNow(){ return new Date(new Date().toLocaleString('en-US', {timeZone:'Asia/Kolkata'})); }
+function marketOpen(){
+  const d = istNow(), day = d.getDay(), mins = d.getHours()*60 + d.getMinutes();
+  return day>=1 && day<=5 && mins >= 555 && mins <= 930; // 09:15-15:30 IST
+}
+async function load(){
+  let wl=[], q={quotes:[]};
+  try { wl = await (await fetch('watchlist.json?t='+Date.now())).json(); } catch(e){}
+  try { q  = await (await fetch('quotes.json?t='+Date.now())).json(); } catch(e){}
+  const bySym = {}; (q.quotes||[]).forEach(x => bySym[x.symbol]=x);
+  const open = marketOpen();
+  document.getElementById('mkt').textContent = open ? 'Market OPEN' : 'Market CLOSED';
+  document.getElementById('mkt').className = 'badge ' + (open?'open':'closed');
+  let upd = 'No data yet';
+  if (q.updated_ts) {
+    const mins = Math.max(0, Math.round((Date.now()/1000 - q.updated_ts)/60));
+    upd = mins < 1 ? 'Updated just now' : 'Updated ' + mins + ' min ago';
+  }
+  document.getElementById('upd').textContent = upd + ' (IST ' + (q.updated_at_ist||'--') + ')';
+  const g = document.getElementById('grid'); g.innerHTML = '';
+  let any = false;
+  wl.forEach(w => {
+    const d = bySym[w.symbol];
+    const el = document.createElement('div'); el.className='card';
+    if (!d || d.error) {
+      el.innerHTML = '<div class="row"><div><div class="name">'+w.name+'</div><div class="sym">'+w.symbol+'</div></div></div><div class="empty" style="padding:14px">Waiting for first update...</div>';
+    } else {
+      any = true;
+      const upCls = d.change >= 0 ? 'up' : 'dn', arrow = d.change >= 0 ? '&#9650;' : '&#9660;';
+      const lo = d.low, hi = d.high;
+      const pos = (lo!=null && hi!=null && hi>lo) ? Math.min(100, Math.max(0, (d.ltp-lo)/(hi-lo)*100)) : 50;
+      el.innerHTML =
+        '<div class="row"><div><div class="name">'+d.name+'</div><div class="sym">'+d.symbol+'</div></div>'+
+        '<div class="chg '+upCls+'">'+arrow+' '+fmt(Math.abs(d.change))+' ('+(d.pct>=0?'+':'')+d.pct+'%)</div></div>'+
+        '<div class="ltp '+upCls+'">&#8377;'+fmt(d.ltp)+'</div>'+
+        '<div class="range"><div class="dot" style="left:'+pos+'%"></div></div>'+
+        '<div class="range-lbl"><span>L '+fmt(lo)+'</span><span>H '+fmt(hi)+'</span></div>'+
+        '<div class="stats">'+
+          '<div>Open <b>'+fmt(d.open)+'</b></div><div>Prev close <b>'+fmt(d.prev_close)+'</b></div>'+
+          '<div>Volume <b>'+fmtVol(d.volume)+'</b></div><div>Feed <b>'+(d.feed_time||'--')+'</b></div>'+
+        '</div>';
+    }
+    g.appendChild(el);
+  });
+  if (!wl.length) g.innerHTML = '<div class="empty">Watchlist not found.</div>';
+}
+load(); setInterval(load, 60000);
+</script>
+</body>
+</html>
