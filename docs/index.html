@@ -31,6 +31,18 @@
   .range-lbl { display:flex; justify-content:space-between; font-size:10px; color:var(--mut); margin-top:5px; }
   .empty { color:var(--mut); font-size:14px; padding:40px; text-align:center; grid-column:1/-1; }
   footer { margin-top:18px; font-size:11px; color:var(--mut); text-align:center; }
+
+  .lockbox { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; margin-top:18px; }
+  .lockbox input { background:var(--bg); border:1px solid var(--border); color:var(--txt); border-radius:8px; padding:8px 10px; font-size:14px; width:220px; }
+  .lockbox button { background:var(--up); border:0; color:#04120b; font-weight:700; border-radius:8px; padding:8px 14px; font-size:14px; cursor:pointer; margin-left:8px; }
+  .lockbox button.ghost { background:transparent; border:1px solid var(--border); color:var(--mut); }
+  table { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+  th, td { text-align:right; padding:8px 6px; border-bottom:1px solid var(--border); }
+  th:first-child, td:first-child { text-align:left; }
+  th { color:var(--mut); font-size:11px; text-transform:uppercase; letter-spacing:.4px; }
+  .trow td { font-weight:600; }
+  .hmeta { font-size:11px; color:var(--mut); margin-top:8px; }
+  #herr { color:var(--dn); font-size:12px; margin-top:8px; display:none; }
 </style>
 </head>
 <body>
@@ -42,6 +54,19 @@
   </div>
 </header>
 <div class="grid" id="grid"><div class="empty">Loading...</div></div>
+
+<div class="lockbox" id="holdbox">
+  <div class="row"><div class="name">My Holdings &#128274;</div><div class="sym" id="hmeta"></div></div>
+  <div id="hlocked" style="margin-top:12px">
+    <input type="password" id="hpass" placeholder="Passphrase" autocomplete="off">
+    <button id="hunlock">Unlock</button>
+    <div id="herr"></div>
+  </div>
+  <div id="hopen" style="display:none">
+    <div style="text-align:right"><button class="ghost" id="hlock">Lock</button></div>
+    <div style="overflow-x:auto"><table id="htable"></table></div>
+  </div>
+</div>
 <footer>Research only &middot; Angel One SmartAPI &middot; refreshes ~every 5 min in market hours &middot; auto-reload 60s</footer>
 <script>
 const fmt = n => n==null ? '--' : Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
@@ -92,6 +117,53 @@ async function load(){
   });
   if (!wl.length) g.innerHTML = '<div class="empty">Watchlist not found.</div>';
 }
+
+let hData = null, hEnc = null;
+async function unlockHoldings(){
+  const err = document.getElementById('herr'); err.style.display='none';
+  const pass = document.getElementById('hpass').value;
+  if(!pass) return;
+  try {
+    if(!hEnc){ hEnc = await (await fetch('holdings.enc.json?t='+Date.now())).json(); }
+    const b64 = x => Uint8Array.from(atob(x), c => c.charCodeAt(0));
+    const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      {name:'PBKDF2', hash:'SHA-256', salt:b64(hEnc.salt), iterations:hEnc.iter},
+      km, {name:'AES-GCM', length:256}, false, ['decrypt']);
+    const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(hEnc.iv)}, key, b64(hEnc.ct));
+    hData = JSON.parse(new TextDecoder().decode(pt));
+    renderHoldings();
+  } catch(e){
+    err.textContent = 'Wrong passphrase (ya haju holdings update nathi thayu).'; err.style.display='block';
+  }
+}
+function renderHoldings(){
+  document.getElementById('hlocked').style.display='none';
+  document.getElementById('hopen').style.display='block';
+  document.getElementById('hmeta').textContent = (hEnc.count!=null? hEnc.count+' stocks':'') + ' · updated ' + (hEnc.updated_at_ist||'--');
+  const t = document.getElementById('htable');
+  let rows = '<tr><th>Stock</th><th>Qty</th><th>Avg</th><th>LTP</th><th>Invested</th><th>Current</th><th>P&amp;L</th><th>%</th></tr>';
+  (hData.holdings||[]).forEach(x => {
+    const cls = (x.pnl||0) >= 0 ? 'up' : 'dn';
+    rows += '<tr><td>'+x.name+'</td><td>'+x.qty+'</td><td>'+fmt(x.avg)+'</td><td>'+fmt(x.ltp)+'</td>'+
+      '<td>'+fmt(x.invested)+'</td><td>'+fmt(x.current)+'</td>'+
+      '<td class="'+cls+'">'+fmt(x.pnl)+'</td><td class="'+cls+'">'+(x.pnl_pct!=null?x.pnl_pct.toFixed(2):'--')+'%</td></tr>';
+  });
+  const tt = hData.totals||{};
+  if (tt.invested!=null){
+    const cls = (tt.pnl||0) >= 0 ? 'up' : 'dn';
+    rows += '<tr class="trow"><td>TOTAL</td><td></td><td></td><td></td><td>'+fmt(tt.invested)+'</td><td>'+fmt(tt.current)+'</td>'+
+      '<td class="'+cls+'">'+fmt(tt.pnl)+'</td><td class="'+cls+'">'+(tt.pnl_pct!=null?Number(tt.pnl_pct).toFixed(2):'--')+'%</td></tr>';
+  }
+  t.innerHTML = rows;
+}
+document.getElementById('hunlock').onclick = unlockHoldings;
+document.getElementById('hpass').addEventListener('keydown', e => { if(e.key==='Enter') unlockHoldings(); });
+document.getElementById('hlock').onclick = () => {
+  hData = null; document.getElementById('hopen').style.display='none';
+  document.getElementById('hlocked').style.display='block';
+  document.getElementById('hpass').value=''; document.getElementById('htable').innerHTML='';
+};
 load(); setInterval(load, 60000);
 </script>
 </body>
