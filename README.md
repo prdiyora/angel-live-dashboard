@@ -30,7 +30,7 @@ on GitHub. Tokens come from the SmartAPI scrip master. Next run picks it up.
 
 ## Limits (honest)
 
-- Refresh is ~every 5 min (GitHub's scheduler can lag a few minutes more).
+- Refresh is ~every 2 min (3 cycles inside a 5-min schedule) (GitHub's scheduler can lag a few minutes more).
   True tick-by-tick would need the SmartAPI websocket on an always-on server.
 - SmartAPI logs in fresh every run, so the daily token expiry never matters.
 - Market data only; nothing about the account, holdings or orders is shown.
