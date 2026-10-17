@@ -149,6 +149,9 @@ function renderHoldings(){
       '<td>'+fmt(x.invested)+'</td><td>'+fmt(x.current)+'</td>'+
       '<td class="'+cls+'">'+fmt(x.pnl)+'</td><td class="'+cls+'">'+(x.pnl_pct!=null?x.pnl_pct.toFixed(2):'--')+'%</td></tr>';
   });
+  if (!(hData.holdings||[]).length){
+    rows += '<tr><td colspan="8" style="text-align:center;color:var(--mut)">No holdings right now - jyaare shares demat ma aavshe tyare dekhase.</td></tr>';
+  }
   const tt = hData.totals||{};
   if (tt.invested!=null){
     const cls = (tt.pnl||0) >= 0 ? 'up' : 'dn';
