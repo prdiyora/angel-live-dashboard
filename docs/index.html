@@ -73,7 +73,7 @@
     <div style="overflow-x:auto"><table id="htable"></table></div>
   </div>
 </div>
-<footer>Research only &middot; Angel One SmartAPI &middot; refreshes ~every 5 min in market hours &middot; auto-reload 60s</footer>
+<footer>Research only &middot; Angel One SmartAPI &middot; refreshes ~every 2 min in market hours &middot; auto-reload 60s</footer>
 <script>
 const fmt = n => n==null ? '--' : Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
 const fmtVol = n => n==null ? '--' : Intl.NumberFormat('en-IN', {notation:'compact', maximumFractionDigits:1}).format(n);
@@ -90,12 +90,15 @@ async function load(){
   const open = marketOpen();
   document.getElementById('mkt').textContent = open ? 'Market OPEN' : 'Market CLOSED';
   document.getElementById('mkt').className = 'badge ' + (open?'open':'closed');
-  let upd = 'No data yet';
+  let upd = 'No data yet', stale = false;
   if (q.updated_ts) {
     const mins = Math.max(0, Math.round((Date.now()/1000 - q.updated_ts)/60));
     upd = mins < 1 ? 'Updated just now' : 'Updated ' + mins + ' min ago';
+    stale = open && mins > 10;
   }
-  document.getElementById('upd').textContent = upd + ' (IST ' + (q.updated_at_ist||'--') + ')';
+  const updEl = document.getElementById('upd');
+  updEl.textContent = (stale ? 'STALE - ' : '') + upd + ' (IST ' + (q.updated_at_ist||'--') + ')';
+  updEl.className = 'badge' + (stale ? ' closed' : '');
   const g = document.getElementById('grid'); g.innerHTML = '';
   let any = false;
   wl.forEach(w => {

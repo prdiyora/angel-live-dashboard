@@ -1,9 +1,14 @@
 name: Update quotes
 on:
   schedule:
-    # Trigger every 5 min, Mon-Fri, ~08:30-16:25 IST (03:00-10:55 UTC).
-    # Each run loops 3 fetch cycles ~100s apart -> effective ~2 min refresh.
-    - cron: "*/5 3-10 * * 1-5"
+    # Mon-Fri, deliberately off-peak minutes and only 2 fires/day: GitHub
+    # drops high-frequency (*/5) cron schedules under load, so instead each
+    # fire starts ONE long-running job that fetches every ~2 min itself.
+    # Kick A: 08:55 IST (03:25 UTC) -> loops until 15:40 IST
+    #         (GitHub caps a job at ~6h, so this dies ~14:55 IST)
+    # Kick B: 14:50 IST (09:20 UTC) -> covers the tail until 15:40 IST
+    - cron: "25 3 * * 1-5"
+    - cron: "20 9 * * 1-5"
   workflow_dispatch:
 
 permissions:
@@ -16,31 +21,37 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install requests pyotp cryptography
-      - name: 3 fetch cycles (~2 min cadence)
+      - name: Fetch loop (~2 min cadence, stops 15:40 IST)
         env:
           ANGEL_API_KEY: ${{ secrets.ANGEL_API_KEY }}
           ANGEL_CLIENT_CODE: ${{ secrets.ANGEL_CLIENT_CODE }}
           ANGEL_MPIN: ${{ secrets.ANGEL_MPIN }}
           ANGEL_TOTP_SECRET: ${{ secrets.ANGEL_TOTP_SECRET }}
           ANGEL_DASH_PASSPHRASE: ${{ secrets.ANGEL_DASH_PASSPHRASE }}
-        timeout-minutes: 9
+        timeout-minutes: 355
         run: |
           git config user.name "quotes-bot"
           git config user.email "quotes-bot@users.noreply.github.com"
-          for i in 1 2 3; do
-            echo "=== cycle $i $(date -u +%H:%M:%SZ) ==="
-            python scripts/fetch_quotes.py || echo "cycle $i fetch failed (transient), continuing"
+          while :; do
+            now_ist=$(TZ=Asia/Kolkata date +%H%M)
+            dow=$(TZ=Asia/Kolkata date +%u)
+            if [ "$dow" -gt 5 ] || [ "$now_ist" -ge 1540 ]; then
+              echo "session over, stopping"; break
+            fi
+            echo "=== cycle $(TZ=Asia/Kolkata date '+%H:%M:%S IST') ==="
+            python scripts/fetch_quotes.py || echo "fetch failed (transient), continuing"
             git add docs/quotes.json docs/holdings.enc.json 2>/dev/null || git add docs/quotes.json
             if ! git diff --cached --quiet; then
               git commit -m "quotes: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
               git pull --rebase origin main
               git push
             fi
-            if [ "$i" -lt 3 ]; then sleep 100; fi
+            sleep 110
           done
