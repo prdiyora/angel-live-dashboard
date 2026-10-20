@@ -1,6 +1,6 @@
 {
- "updated_at_ist": "2026-10-19 15:39:22 IST",
- "updated_ts": 1792404562,
+ "updated_at_ist": "2026-10-20 09:49:23 IST",
+ "updated_ts": 1792469963,
  "quotes": [
   {
    "name": "Reliance Industries",
@@ -12,8 +12,8 @@
    "high": 1228.2,
    "low": 1201.0,
    "prev_close": 1211.2,
-   "volume": 15568009,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 15572554,
+   "feed_time": "20-Oct-2026 06:55:06"
   },
   {
    "name": "HDFC Bank",
@@ -25,8 +25,8 @@
    "high": 733.4,
    "low": 707.15,
    "prev_close": 728.85,
-   "volume": 33521732,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 33524133,
+   "feed_time": "20-Oct-2026 06:55:05"
   },
   {
    "name": "ICICI Bank",
@@ -38,8 +38,8 @@
    "high": 1411.8,
    "low": 1377.9,
    "prev_close": 1397.0,
-   "volume": 25149120,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 25149396,
+   "feed_time": "20-Oct-2026 06:55:06"
   },
   {
    "name": "Infosys",
@@ -51,8 +51,8 @@
    "high": 1156.95,
    "low": 1125.1,
    "prev_close": 1161.2,
-   "volume": 13255049,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 13258477,
+   "feed_time": "20-Oct-2026 06:55:06"
   },
   {
    "name": "TCS",
@@ -64,8 +64,8 @@
    "high": 2497.0,
    "low": 2432.1,
    "prev_close": 2465.0,
-   "volume": 8674856,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 8676373,
+   "feed_time": "20-Oct-2026 06:55:06"
   },
   {
    "name": "Bharti Airtel",
@@ -77,8 +77,8 @@
    "high": 1929.6,
    "low": 1863.9,
    "prev_close": 1905.0,
-   "volume": 8585764,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 8586339,
+   "feed_time": "20-Oct-2026 06:55:05"
   },
   {
    "name": "Larsen & Toubro",
@@ -90,8 +90,8 @@
    "high": 3687.7,
    "low": 3632.0,
    "prev_close": 3627.1,
-   "volume": 2331099,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 2331147,
+   "feed_time": "20-Oct-2026 06:55:06"
   },
   {
    "name": "ITC",
@@ -103,8 +103,8 @@
    "high": 263.9,
    "low": 259.95,
    "prev_close": 263.5,
-   "volume": 11522059,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 11528925,
+   "feed_time": "20-Oct-2026 06:55:06"
   },
   {
    "name": "State Bank of India",
@@ -116,8 +116,8 @@
    "high": 983.8,
    "low": 960.7,
    "prev_close": 962.6,
-   "volume": 15079976,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 15083265,
+   "feed_time": "20-Oct-2026 06:55:06"
   },
   {
    "name": "Kotak Mahindra Bank",
@@ -129,8 +129,8 @@
    "high": 447.15,
    "low": 438.6,
    "prev_close": 447.4,
-   "volume": 15003825,
-   "feed_time": "19-Oct-2026 15:39:21"
+   "volume": 15004260,
+   "feed_time": "20-Oct-2026 06:55:06"
   }
  ]
 }
