@@ -41,7 +41,20 @@ def encrypt_holdings(holdings_payload, passphrase):
             "iv": base64.b64encode(iv).decode(),
             "ct": base64.b64encode(ct).decode()}
 
+# NSE trading holidays 2026 (NSE circular 172/2025). On these dates the
+# market is closed; skip everything so no stale no-op commits happen and the
+# dashboard keeps showing the last trading day's close.
+NSE_HOLIDAYS_2026 = {
+    "2026-01-26", "2026-03-03", "2026-03-26", "2026-03-31", "2026-04-03",
+    "2026-04-14", "2026-05-01", "2026-05-28", "2026-06-26", "2026-09-14",
+    "2026-10-02", "2026-10-20", "2026-11-10", "2026-11-24", "2026-12-25",
+}
+
 def main():
+    today_ist = datetime.now(IST).strftime("%Y-%m-%d")
+    if today_ist in NSE_HOLIDAYS_2026:
+        print("NSE holiday today - market closed, nothing to do")
+        return
     api_key = os.environ["ANGEL_API_KEY"]
     client_code = os.environ["ANGEL_CLIENT_CODE"]
     mpin = os.environ["ANGEL_MPIN"]
