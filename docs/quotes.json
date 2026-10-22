@@ -1,6 +1,6 @@
 {
- "updated_at_ist": "2026-10-22 15:25:04 IST",
- "updated_ts": 1792662904,
+ "updated_at_ist": "2026-10-22 15:26:59 IST",
+ "updated_ts": 1792663019,
  "quotes": [
   {
    "name": "Reliance Industries",
@@ -13,7 +13,7 @@
    "low": 1185.7,
    "prev_close": 1209.0,
    "volume": 14058376,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:58"
   },
   {
    "name": "HDFC Bank",
@@ -26,7 +26,7 @@
    "low": 689.1,
    "prev_close": 706.95,
    "volume": 58734972,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:58"
   },
   {
    "name": "ICICI Bank",
@@ -39,7 +39,7 @@
    "low": 1375.1,
    "prev_close": 1385.0,
    "volume": 15166622,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:58"
   },
   {
    "name": "Infosys",
@@ -52,7 +52,7 @@
    "low": 1144.05,
    "prev_close": 1168.0,
    "volume": 16166914,
-   "feed_time": "22-Oct-2026 15:25:04"
+   "feed_time": "22-Oct-2026 15:26:58"
   },
   {
    "name": "TCS",
@@ -65,7 +65,7 @@
    "low": 2479.0,
    "prev_close": 2529.0,
    "volume": 3973572,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:59"
   },
   {
    "name": "Bharti Airtel",
@@ -78,7 +78,7 @@
    "low": 1874.1,
    "prev_close": 1891.7,
    "volume": 12123040,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:58"
   },
   {
    "name": "Larsen & Toubro",
@@ -91,7 +91,7 @@
    "low": 3595.0,
    "prev_close": 3636.0,
    "volume": 2494738,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:59"
   },
   {
    "name": "ITC",
@@ -104,7 +104,7 @@
    "low": 256.35,
    "prev_close": 262.0,
    "volume": 14901150,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:58"
   },
   {
    "name": "State Bank of India",
@@ -117,7 +117,7 @@
    "low": 950.05,
    "prev_close": 963.0,
    "volume": 5385784,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:58"
   },
   {
    "name": "Kotak Mahindra Bank",
@@ -130,7 +130,7 @@
    "low": 433.75,
    "prev_close": 437.8,
    "volume": 16386993,
-   "feed_time": "22-Oct-2026 15:25:03"
+   "feed_time": "22-Oct-2026 15:26:58"
   }
  ]
 }
