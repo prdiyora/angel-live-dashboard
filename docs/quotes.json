@@ -1,6 +1,6 @@
 {
- "updated_at_ist": "2026-10-26 15:29:34 IST",
- "updated_ts": 1793008774,
+ "updated_at_ist": "2026-10-26 15:31:29 IST",
+ "updated_ts": 1793008889,
  "quotes": [
   {
    "name": "Reliance Industries",
@@ -13,7 +13,7 @@
    "low": 1174.5,
    "prev_close": 1190.0,
    "volume": 7488472,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "HDFC Bank",
@@ -26,7 +26,7 @@
    "low": 684.0,
    "prev_close": 692.8,
    "volume": 23485616,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "ICICI Bank",
@@ -39,7 +39,7 @@
    "low": 1378.7,
    "prev_close": 1394.2,
    "volume": 7935332,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "Infosys",
@@ -52,7 +52,7 @@
    "low": 1107.0,
    "prev_close": 1153.8,
    "volume": 25961107,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "TCS",
@@ -65,7 +65,7 @@
    "low": 2491.6,
    "prev_close": 2530.0,
    "volume": 4325477,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "Bharti Airtel",
@@ -78,7 +78,7 @@
    "low": 1874.5,
    "prev_close": 1892.1,
    "volume": 2993332,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "Larsen & Toubro",
@@ -91,7 +91,7 @@
    "low": 3615.1,
    "prev_close": 3647.0,
    "volume": 1144196,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "ITC",
@@ -104,7 +104,7 @@
    "low": 254.3,
    "prev_close": 257.9,
    "volume": 15093979,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "State Bank of India",
@@ -117,7 +117,7 @@
    "low": 943.4,
    "prev_close": 958.6,
    "volume": 6676961,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   },
   {
    "name": "Kotak Mahindra Bank",
@@ -130,7 +130,7 @@
    "low": 437.6,
    "prev_close": 430.5,
    "volume": 32584687,
-   "feed_time": "26-Oct-2026 15:29:20"
+   "feed_time": "26-Oct-2026 15:31:21"
   }
  ]
 }
