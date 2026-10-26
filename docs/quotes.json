@@ -1,19 +1,19 @@
 {
- "updated_at_ist": "2026-10-26 14:39:52 IST",
- "updated_ts": 1793005792,
+ "updated_at_ist": "2026-10-26 14:41:47 IST",
+ "updated_ts": 1793005907,
  "quotes": [
   {
    "name": "Reliance Industries",
    "symbol": "RELIANCE-EQ",
-   "ltp": 1200.3,
-   "change": 10.3,
-   "pct": 0.87,
+   "ltp": 1201.1,
+   "change": 11.1,
+   "pct": 0.93,
    "open": 1186.1,
    "high": 1204.5,
    "low": 1174.5,
    "prev_close": 1190.0,
-   "volume": 6443019,
-   "feed_time": "26-Oct-2026 14:39:52"
+   "volume": 6456295,
+   "feed_time": "26-Oct-2026 14:41:46"
   },
   {
    "name": "HDFC Bank",
@@ -25,112 +25,112 @@
    "high": 693.8,
    "low": 684.0,
    "prev_close": 692.8,
-   "volume": 20219431,
-   "feed_time": "26-Oct-2026 14:39:52"
+   "volume": 20273468,
+   "feed_time": "26-Oct-2026 14:41:47"
   },
   {
    "name": "ICICI Bank",
    "symbol": "ICICIBANK-EQ",
-   "ltp": 1398.2,
-   "change": 4.0,
-   "pct": 0.29,
+   "ltp": 1399.0,
+   "change": 4.8,
+   "pct": 0.34,
    "open": 1394.2,
    "high": 1400.0,
    "low": 1378.7,
    "prev_close": 1394.2,
-   "volume": 6426699,
-   "feed_time": "26-Oct-2026 14:39:51"
+   "volume": 6442768,
+   "feed_time": "26-Oct-2026 14:41:47"
   },
   {
    "name": "Infosys",
    "symbol": "INFY-EQ",
-   "ltp": 1151.85,
-   "change": -1.95,
-   "pct": -0.17,
+   "ltp": 1152.8,
+   "change": -1.0,
+   "pct": -0.09,
    "open": 1115.0,
    "high": 1153.65,
    "low": 1107.0,
    "prev_close": 1153.8,
-   "volume": 23276967,
-   "feed_time": "26-Oct-2026 14:39:52"
+   "volume": 23368828,
+   "feed_time": "26-Oct-2026 14:41:46"
   },
   {
    "name": "TCS",
    "symbol": "TCS-EQ",
-   "ltp": 2529.3,
-   "change": -0.7,
-   "pct": -0.03,
+   "ltp": 2531.6,
+   "change": 1.6,
+   "pct": 0.06,
    "open": 2500.0,
    "high": 2549.7,
    "low": 2491.6,
    "prev_close": 2530.0,
-   "volume": 3531758,
-   "feed_time": "26-Oct-2026 14:39:52"
+   "volume": 3554447,
+   "feed_time": "26-Oct-2026 14:41:47"
   },
   {
    "name": "Bharti Airtel",
    "symbol": "BHARTIARTL-EQ",
-   "ltp": 1907.2,
-   "change": 15.1,
-   "pct": 0.8,
+   "ltp": 1909.2,
+   "change": 17.1,
+   "pct": 0.9,
    "open": 1886.0,
-   "high": 1907.7,
+   "high": 1909.2,
    "low": 1874.5,
    "prev_close": 1892.1,
-   "volume": 2196514,
-   "feed_time": "26-Oct-2026 14:39:51"
+   "volume": 2215760,
+   "feed_time": "26-Oct-2026 14:41:46"
   },
   {
    "name": "Larsen & Toubro",
    "symbol": "LT-EQ",
-   "ltp": 3670.2,
-   "change": 23.2,
+   "ltp": 3670.5,
+   "change": 23.5,
    "pct": 0.64,
    "open": 3642.2,
    "high": 3684.0,
    "low": 3615.1,
    "prev_close": 3647.0,
-   "volume": 1024359,
-   "feed_time": "26-Oct-2026 14:39:52"
+   "volume": 1026167,
+   "feed_time": "26-Oct-2026 14:41:46"
   },
   {
    "name": "ITC",
    "symbol": "ITC-EQ",
-   "ltp": 259.35,
-   "change": 1.45,
-   "pct": 0.56,
+   "ltp": 259.45,
+   "change": 1.55,
+   "pct": 0.6,
    "open": 257.9,
    "high": 260.2,
    "low": 254.3,
    "prev_close": 257.9,
-   "volume": 13684017,
-   "feed_time": "26-Oct-2026 14:39:51"
+   "volume": 13709100,
+   "feed_time": "26-Oct-2026 14:41:47"
   },
   {
    "name": "State Bank of India",
    "symbol": "SBIN-EQ",
-   "ltp": 959.05,
-   "change": 0.45,
+   "ltp": 959.1,
+   "change": 0.5,
    "pct": 0.05,
    "open": 956.5,
    "high": 961.55,
    "low": 943.4,
    "prev_close": 958.6,
-   "volume": 5262941,
-   "feed_time": "26-Oct-2026 14:39:52"
+   "volume": 5279363,
+   "feed_time": "26-Oct-2026 14:41:46"
   },
   {
    "name": "Kotak Mahindra Bank",
    "symbol": "KOTAKBANK-EQ",
-   "ltp": 440.35,
-   "change": 9.85,
-   "pct": 2.29,
+   "ltp": 440.85,
+   "change": 10.35,
+   "pct": 2.4,
    "open": 440.9,
    "high": 446.3,
    "low": 437.6,
    "prev_close": 430.5,
-   "volume": 28252453,
-   "feed_time": "26-Oct-2026 14:39:52"
+   "volume": 28375572,
+   "feed_time": "26-Oct-2026 14:41:46"
   }
  ]
 }
