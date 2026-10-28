@@ -1,6 +1,6 @@
 {
- "updated_at_ist": "2026-10-28 15:23:58 IST",
- "updated_ts": 1793181238,
+ "updated_at_ist": "2026-10-28 15:25:53 IST",
+ "updated_ts": 1793181353,
  "quotes": [
   {
    "name": "Reliance Industries",
@@ -13,7 +13,7 @@
    "low": 1156.4,
    "prev_close": 1196.2,
    "volume": 21365018,
-   "feed_time": "28-Oct-2026 15:23:57"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "HDFC Bank",
@@ -26,7 +26,7 @@
    "low": 669.2,
    "prev_close": 680.2,
    "volume": 27391700,
-   "feed_time": "28-Oct-2026 15:23:56"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "ICICI Bank",
@@ -39,7 +39,7 @@
    "low": 1361.4,
    "prev_close": 1386.9,
    "volume": 9012271,
-   "feed_time": "28-Oct-2026 15:23:56"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "Infosys",
@@ -52,7 +52,7 @@
    "low": 1103.4,
    "prev_close": 1163.0,
    "volume": 15275517,
-   "feed_time": "28-Oct-2026 15:23:58"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "TCS",
@@ -65,7 +65,7 @@
    "low": 2408.2,
    "prev_close": 2496.9,
    "volume": 2463032,
-   "feed_time": "28-Oct-2026 15:23:57"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "Bharti Airtel",
@@ -78,7 +78,7 @@
    "low": 1926.6,
    "prev_close": 1978.8,
    "volume": 13918979,
-   "feed_time": "28-Oct-2026 15:23:57"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "Larsen & Toubro",
@@ -91,7 +91,7 @@
    "low": 3770.0,
    "prev_close": 3665.1,
    "volume": 6117997,
-   "feed_time": "28-Oct-2026 15:23:53"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "ITC",
@@ -104,7 +104,7 @@
    "low": 252.8,
    "prev_close": 260.0,
    "volume": 14780671,
-   "feed_time": "28-Oct-2026 15:23:56"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "State Bank of India",
@@ -117,7 +117,7 @@
    "low": 944.0,
    "prev_close": 945.1,
    "volume": 10793467,
-   "feed_time": "28-Oct-2026 15:23:52"
+   "feed_time": "28-Oct-2026 15:25:49"
   },
   {
    "name": "Kotak Mahindra Bank",
@@ -130,7 +130,7 @@
    "low": 438.3,
    "prev_close": 442.5,
    "volume": 15894232,
-   "feed_time": "28-Oct-2026 15:23:54"
+   "feed_time": "28-Oct-2026 15:25:49"
   }
  ]
 }
